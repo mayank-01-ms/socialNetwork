@@ -3,6 +3,13 @@
     's Profile
 </h1>
 
+<% avatar_url = @user.avatar.present? ? 
+                @user.avatar
+                :
+                "https://ui-avatars.com/api/?name=#{@auser.first_name}+#{@user.last_name}"
+%>
+<img src=<%= avatar_url %> />
+
 <div>
     <strong>First name:</strong>
     <%= @user.first_name %>
@@ -22,3 +29,5 @@
     <strong>Date of birth</strong>
     <%= @user.dob %>
 </div>
+
+<%= link_to "Edit Profile", edit_user_registration_path %>

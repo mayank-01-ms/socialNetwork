@@ -11,6 +11,11 @@
   </head>
 
   <body>
+  <nav>
+    <%= link_to "Login", new_user_session_path %>
+    <%= link_to "Profile", profile_path  %>
+
+  </nav>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
     <%= yield %>

@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+
+  mount_uploader :avatar, AvatarUploader
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -8,11 +11,12 @@ class User < ApplicationRecord
   validates :last_name, length: { minimum: 3, maximum: 30 }
   validates :dob, presence: true 
   validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i }
+  validates :password, length: { minimum: 8 }, on: :create
 
-  validate :password_lower_case
-  validate :password_uppercase
-  validate :password_special_char
-  validate :password_contains_number
+  validate :password_lower_case, on: :create
+  validate :password_uppercase, on: :create
+  validate :password_special_char, on: :create
+  validate :password_contains_number, on: :create
 
   def password_uppercase
     return if !!password.match(/\p{Upper}/)
