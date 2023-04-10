@@ -8,4 +8,7 @@ Rails.application.routes.draw do
   get '/posts', to: "posts#index"
   get 'posts/new'
   post 'posts/new', to: "posts#create", as: :new_post
+
+  get '/settings', to: "users#settings"
+  patch '/settings', to: "users#update_settings"
 end

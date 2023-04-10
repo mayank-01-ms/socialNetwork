@@ -1,0 +1,31 @@
+<h1>Settings</h1>
+
+<%= form_with(model: @user, url: settings_path) do | f | %>
+    <% if @user.errors.any? %>
+      <div style="color: red">
+        <h2><%= pluralize(@user.errors.count, "error") %> prohibited these settings from being saved:</h2>
+        <ul>
+          <% @user.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div>
+        <%= f.label :posts_visible_to, style: "display: block" %>
+        <%= f.select :posts_visible_to, User.posts_visible_tos.map { |key, value| [key.humanize, key] }%>
+    </div>
+    <div>
+        <%= f.label :who_can_send_me_invites?, style: "display: block" %>
+        <%= f.select :allow_invites_from, User.allow_invites_froms.map { |key, value| [key.humanize, key] } %>
+    </div>
+    <div>        
+        <%= f.label :alow_my_profile_to_be_searched_by, style: "display: block" %>
+        <%= f.select :search_visibility, User.search_visibilities.map { |key, value| [key.humanize, key] } %>
+    </div>
+
+    <br />
+    <%= button_to "Update profile" %>
+
+<% end %>

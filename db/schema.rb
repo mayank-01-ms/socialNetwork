@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_06_065159) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_06_071817) do
   create_table "posts", force: :cascade do |t|
     t.string "text"
     t.string "media"
@@ -33,6 +33,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_06_065159) do
     t.string "last_name"
     t.date "dob"
     t.string "avatar"
+    t.integer "posts_visible_to", default: 0
+    t.integer "search_visibility", default: 0
+    t.integer "allow_invites_from", default: 0
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
