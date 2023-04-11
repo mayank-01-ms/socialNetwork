@@ -6,7 +6,7 @@
 <% avatar_url = @user.avatar.present? ? 
                 @user.avatar
                 :
-                "https://ui-avatars.com/api/?name=#{@auser.first_name}+#{@user.last_name}"
+                "https://ui-avatars.com/api/?name=#{@user.first_name}+#{@user.last_name}"
 %>
 <img src=<%= avatar_url %> />
 
