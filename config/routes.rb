@@ -3,11 +3,15 @@ Rails.application.routes.draw do
   get 'pages/index'
   root "pages#index"
   
-  get 'profile', to: "users#show"
+  get 'profile/:id', to: "users#show", as: :profile
 
   get '/posts', to: "posts#index"
   get 'posts/new'
   post 'posts/new', to: "posts#create", as: :new_post
+  get 'friends', to: "users#friends"
+  get 'users', to: "users#index"
+
+  post 'add_friend', to: "users#add_friend"
 
   get '/settings', to: "users#settings"
   patch '/settings', to: "users#update_settings"

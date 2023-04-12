@@ -1,8 +1,40 @@
 class UsersController < ApplicationController
     before_action :authenticate_user!
 
+    def add_friend
+        @friend_id = params['friend']
+        @friend_to_add = User.find(@friend_id)
+        if @friend_to_add.nil?
+            flash[:alert] = "User doesn't exists"
+            redirect_to root_path
+        else
+            if helpers.are_friends(current_user, @friend_id)
+                flash[:alert] = "Already friends with this user"
+                p "Also check for user settings"
+                redirect_to profile_path(@friend_id)
+            else 
+                friendship = Friendship.create({user_id: current_user.id, friend_id: @friend_id})
+                
+                if friendship.save
+                    flash[:notice] = "Invite sent successfully"
+                else
+                    flash[:alert] = "Could not sent invite"
+                end
+                redirect_to profile_path(@friend_id)
+            end
+        end
+    end
+
+    def friends
+        @friends = current_user.friends
+    end
+
+    def index
+        @users = User.all
+    end
+
     def show
-        @user = current_user
+        @user = User.find(params[:id])
     end
 
     def settings

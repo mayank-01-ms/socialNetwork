@@ -1,0 +1,11 @@
+<h1> 
+<%= %>
+My friends
+</h1>
+<% @friends.each do | friend | %>
+    <div style="margin-top: 1rem">
+        <strong>Name: </strong> <%= friend.first_name + " " + friend.last_name %> <br />
+        <strong>Email: </strong> <%= friend.email %> <br />
+        <strong>Friends since: </strong> <%= friend.created_at %> <br />
+    </div> 
+<% end %>
