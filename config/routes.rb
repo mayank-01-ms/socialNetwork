@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   
   get 'profile/:id', to: "users#show", as: :profile
 
-  get '/posts', to: "posts#index"
+  get '/posts/:user_id', to: "users#posts", as: :user_posts
   get 'posts/new'
   post 'posts/new', to: "posts#create", as: :new_post
   get 'friends', to: "users#friends"

@@ -40,5 +40,8 @@
 </div>
 <% end %>
 
+<%= link_to "View Posts", user_posts_path(@user) %>
 
+<% if current_user && current_user == @user %>
 <%= link_to "Edit Profile", edit_user_registration_path %>
+<% end %>
