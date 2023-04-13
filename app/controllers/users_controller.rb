@@ -64,6 +64,12 @@ class UsersController < ApplicationController
         @friends = current_user.friends
     end
 
+    def feed
+        @friends = current_user.friends
+        @posts = Post.all.where({user_id: @friends, user_id: current_user})
+        # @posts = Post.all.where("(created_at > ? AND user_id IN ?)", 24.hours.ago, @friends)
+    end
+
     def index
         @users = User.all
     end

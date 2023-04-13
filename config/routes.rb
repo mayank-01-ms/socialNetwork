@@ -20,4 +20,5 @@ Rails.application.routes.draw do
   patch '/settings', to: "users#update_settings"
 
   get 'search', to: "users#search"
+  get 'feed', to: "users#feed"
 end
