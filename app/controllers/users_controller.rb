@@ -22,28 +22,42 @@ class UsersController < ApplicationController
                 redirect_to profile_path(@friend_id)
             end
         end
+    end
+    
+    def accept_invite
+        @friend_id = params['friend']
 
-        # @friend_id = params['friend']
-        # @friend_to_add = User.find(@friend_id)
-        # if @friend_to_add.nil?
-        #     flash[:alert] = "User doesn't exists"
-        #     redirect_to root_path
-        # else
-        #     if helpers.are_friends?(current_user, @friend_id)
-        #         flash[:alert] = "Already friends with this user"
-        #         p "Also check for user settings"
-        #         redirect_to profile_path(@friend_id)
-        #     else 
-        #         friendship = Friendship.create({user_id: current_user.id, friend_id: @friend_id})
-                
-        #         if friendship.save
-        #             flash[:notice] = "Invite sent successfully"
-        #         else
-        #             flash[:alert] = "Could not sent invite"
-        #         end
-        #         redirect_to profile_path(@friend_id)
-        #     end
-        # end
+        # if invite exists for current user, then only take action
+        @check_invite = Invitation.find_by({sent_to: current_user.id, user_id: @friend_id})
+        if @check_invite.nil?
+            flash[:alert] = "Something went wrong"
+            redirect_to root_path
+        else
+            friendship = Friendship.create({user_id: current_user.id, friend_id: @friend_id})
+            
+            if friendship.save
+                @check_invite.destroy
+                flash[:notice] = "Accepted invitation"
+            else
+                flash[:alert] = "Could not accept invite"
+            end
+            redirect_to invites_path
+        end
+    end
+
+    def deny_invite
+        @friend_id = params['friend']
+
+        # if invite exists for logged in user, then only take action
+        @check_invite = Invitation.find_by({sent_to: current_user.id, user_id: @friend_id})
+        if @check_invite.nil?
+            flash[:alert] = "Something went wrong"
+            redirect_to root_path
+        else
+            @check_invite.destroy
+            flash[:notice] = "Deleted invitation"
+            redirect_to invites_path
+        end
     end
 
     def friends
