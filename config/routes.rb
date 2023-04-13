@@ -18,4 +18,6 @@ Rails.application.routes.draw do
 
   get '/settings', to: "users#settings"
   patch '/settings', to: "users#update_settings"
+
+  get 'search', to: "users#search"
 end

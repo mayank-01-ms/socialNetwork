@@ -1,0 +1,22 @@
+<h1>Search</h1>
+<%= form_tag search_path, :method => "get" do %>
+    <%= search_field_tag :query, params[:query], placeholder: "Search for users" %>
+    <%= button_tag "Search", :name => nil %>
+<% end %>
+
+<h1>Result</h1>
+<% @results.each do |user| %>
+    <div>
+        <div>
+            <strong>Name: </strong>
+            <%= user.first_name + " " + user.last_name %>
+        </div>
+        <div>
+            <strong>email: </strong>
+            <%= user.email %>
+        </div>
+        <div>
+            <%= link_to "View Profile", profile_path(user) %>
+        </div>
+    </div>
+<% end %>

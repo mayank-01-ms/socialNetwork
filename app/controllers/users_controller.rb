@@ -76,6 +76,15 @@ class UsersController < ApplicationController
         @posts = Post.all.where({user_id: params[:user_id]})
     end
 
+    def search
+        if params[:query].blank?
+            redirect_to search_path and return
+        else
+            @query = params[:query]
+            @results = User.all.where("first_name || ' ' || last_name LIKE ?", "%#{@query}%")
+        end
+    end
+
     def show
         @user = User.find(params[:id])
     end
