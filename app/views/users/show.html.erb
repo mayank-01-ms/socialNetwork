@@ -32,8 +32,10 @@
 
 <%if current_user && current_user != @user %>
 <div>
-    <% if are_friends(current_user, @user) %>
+    <% if are_friends?(current_user, @user) %>
         Friends
+    <% elsif already_sent_invite?(current_user, @user) %>
+        Pending invite
     <% else %>
         <%= button_to "Add friend", add_friend_path, params: {friend: @user} %>
     <% end %>

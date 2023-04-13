@@ -8,14 +8,13 @@ class UsersController < ApplicationController
             flash[:alert] = "User doesn't exists"
             redirect_to root_path
         else
-            if helpers.are_friends(current_user, @friend_id)
-                flash[:alert] = "Already friends with this user"
-                p "Also check for user settings"
+            if helpers.already_sent_invite?(current_user, @friend_id) || helpers.are_friends?(current_user, @friend_id)
+                flash[:alert] = "Already sent an invite or is friend with the user"
                 redirect_to profile_path(@friend_id)
-            else 
-                friendship = Friendship.create({user_id: current_user.id, friend_id: @friend_id})
-                
-                if friendship.save
+            else
+                invite = Invitation.create({sent_to: @friend_id, user_id: current_user.id})
+
+                if invite.save
                     flash[:notice] = "Invite sent successfully"
                 else
                     flash[:alert] = "Could not sent invite"
@@ -23,6 +22,28 @@ class UsersController < ApplicationController
                 redirect_to profile_path(@friend_id)
             end
         end
+
+        # @friend_id = params['friend']
+        # @friend_to_add = User.find(@friend_id)
+        # if @friend_to_add.nil?
+        #     flash[:alert] = "User doesn't exists"
+        #     redirect_to root_path
+        # else
+        #     if helpers.are_friends?(current_user, @friend_id)
+        #         flash[:alert] = "Already friends with this user"
+        #         p "Also check for user settings"
+        #         redirect_to profile_path(@friend_id)
+        #     else 
+        #         friendship = Friendship.create({user_id: current_user.id, friend_id: @friend_id})
+                
+        #         if friendship.save
+        #             flash[:notice] = "Invite sent successfully"
+        #         else
+        #             flash[:alert] = "Could not sent invite"
+        #         end
+        #         redirect_to profile_path(@friend_id)
+        #     end
+        # end
     end
 
     def friends
@@ -31,6 +52,10 @@ class UsersController < ApplicationController
 
     def index
         @users = User.all
+    end
+
+    def invites
+        @invites = Invitation.all.where({sent_to: current_user})
     end
 
     def posts

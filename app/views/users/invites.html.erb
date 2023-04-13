@@ -1,0 +1,10 @@
+<h1>Invites</h1>
+<% @invites.each do | invite | %>
+    <div style="margin-top: 1rem">
+        <strong>Name: </strong> <%= invite.user.first_name + " " + invite.user.last_name %> <br />
+        <strong>Email: </strong> <%= invite.user.email %> <br />
+        <%= link_to "View Profile", profile_path(invite.user) %>
+        <%= button_to "Accept" %>
+        <%= button_to "Deny" %>
+    </div> 
+<% end %>

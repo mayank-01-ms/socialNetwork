@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get 'users', to: "users#index"
 
   post 'add_friend', to: "users#add_friend"
+  get 'invites', to: "users#invites"
 
   get '/settings', to: "users#settings"
   patch '/settings', to: "users#update_settings"
