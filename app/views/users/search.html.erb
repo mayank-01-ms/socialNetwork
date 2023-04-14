@@ -5,7 +5,7 @@
 <% end %>
 
 <h1>Result</h1>
-<% @results.each do |user| %>
+<% @results && @results.each do |user| %>
     <% if is_profile_searchable?(current_user.id, user.id) %>
         <%= render "profile", obj: user %>
     <% end %>

@@ -76,7 +76,7 @@ class UsersController < ApplicationController
         @friends = current_user.friends
         @posts = Post.where({user_id: @friends}).where("created_at > ?", 24.hours.ago)
         
-        @suggestions = User.where.not({id: @friends}).where.not({id: current_user})
+        @suggestions = User.where.not({id: @friends}).where.not({id: current_user}).limit(10)
     end
 
     def index
@@ -103,10 +103,10 @@ class UsersController < ApplicationController
 
     def search
         if params[:query].blank?
-            redirect_to search_path and return
+            render 'search' and return
         else
             @query = params[:query]
-            @results = User.where("first_name || ' ' || last_name LIKE ?", "%#{@query}%")
+            @results = User.where("first_name || ' ' || last_name LIKE ?", "%#{@query}%").limit(30)
         end
     end
 

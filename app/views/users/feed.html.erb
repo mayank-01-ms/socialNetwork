@@ -21,8 +21,6 @@ Feed
 <h1>Suggestions: </h1>
 <% @suggestions.each do | user | %>
     <div style="margin-top: 1rem">
-        <strong>Name: </strong> <%= user.first_name + " " + user.last_name %> <br />
-        <strong>Email: </strong> <%= user.email %> <br />
-        <%= link_to "View Profile", profile_path(user) %>
+        <%= render "profile", obj: user %>
     </div> 
 <% end %>
