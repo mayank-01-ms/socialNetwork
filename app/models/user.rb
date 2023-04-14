@@ -16,7 +16,7 @@ class User < ApplicationRecord
 
   enum :posts_visible_to, { everyone: 0, friends: 1, friends_of_friends: 2 }, suffix: true
   enum :search_visibility, { everyone: 0, friends: 1, friends_of_friends: 2 }, suffix: true
-  enum :allow_invites_from, { everyone: 0, friends: 1, friends_of_friends: 2 }, suffix: true
+  enum :allow_invites_from, { everyone: 0, friends_of_friends: 1 }, suffix: true
 
   validates :first_name, length: { minimum: 3, maximum: 30 }
   validates :last_name, length: { minimum: 3, maximum: 30 }

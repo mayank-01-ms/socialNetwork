@@ -4,13 +4,15 @@ class UsersController < ApplicationController
     def add_friend
         @friend_id = params['friend']
         @friend_to_add = User.find(@friend_id)
+
         if @friend_to_add.nil?
             flash[:alert] = "User doesn't exists"
             redirect_to root_path
+        elsif helpers.can_send_invites?(current_user, @friend_id) == false
+            flash[:notice] = "Cannot send invite to this user due to their privacy settings"
         else
             if helpers.already_sent_invite?(current_user, @friend_id) || helpers.are_friends?(current_user, @friend_id)
                 flash[:alert] = "Already sent an invite or is friend with the user"
-                redirect_to profile_path(@friend_id)
             else
                 invite = Invitation.create({sent_to: @friend_id, user_id: current_user.id})
 
@@ -19,9 +21,10 @@ class UsersController < ApplicationController
                 else
                     flash[:alert] = "Could not sent invite"
                 end
-                redirect_to profile_path(@friend_id)
             end
         end
+        redirect_to profile_path(@friend_id)
+
     end
     
     def accept_invite
@@ -81,10 +84,15 @@ class UsersController < ApplicationController
 
     def posts
         user_id = params[:user_id]
-        if user_id == current_user.id.to_s or helpers.are_friends?(current_user, user_id)
-            @posts = Post.all.where({user_id: user_id})
-        else 
-            @posts = Post.all.where({user_id: user_id}).where({is_private: false})
+        if helpers.can_see_posts?(current_user, user_id)
+            if user_id == current_user.id.to_s or helpers.are_friends?(current_user, user_id)
+                @posts = Post.all.where({user_id: user_id})
+            else 
+                @posts = Post.all.where({user_id: user_id}).where({is_private: false})
+            end
+        else
+            flash[:notice] = "You cannot this user posts due to their privacy settings"
+            @posts = []
         end
     end
 
