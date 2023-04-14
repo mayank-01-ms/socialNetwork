@@ -3,12 +3,9 @@
     's Profile
 </h1>
 
-<% avatar_url = @user.avatar.present? ? 
-                @user.avatar
-                :
-                "https://ui-avatars.com/api/?name=#{@user.first_name}+#{@user.last_name}"
-%>
-<img src=<%= avatar_url %> />
+<div>
+    <%= render "profile_image", obj: @user %>
+</div>
 
 <div>
     <strong>First name:</strong>
@@ -45,5 +42,5 @@
 <%= link_to "View Posts", user_posts_path(@user) %>
 
 <% if current_user && current_user == @user %>
-<%= link_to "Edit Profile", edit_user_registration_path %>
+    <%= link_to "Edit Profile", edit_user_registration_path %>
 <% end %>

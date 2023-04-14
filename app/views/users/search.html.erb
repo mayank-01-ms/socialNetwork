@@ -8,6 +8,7 @@
 <% @results.each do |user| %>
     <div>
         <div>
+            <%= render "profile_image", obj: user %>
             <strong>Name: </strong>
             <%= user.first_name + " " + user.last_name %>
         </div>

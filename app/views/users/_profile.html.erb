@@ -1,0 +1,23 @@
+<% user = obj %>
+<div>
+    <div>
+        <%= render "profile_image", obj: user %>
+    </div>
+    <div>
+        <strong>Name: </strong>
+        <%= user.first_name + " " + user.last_name %>
+    </div>
+    <%if current_user and are_friends?(current_user, user) %>
+        <div>
+            <strong>email: </strong>
+            <%= user.email %>
+        </div>
+        <div>
+            <strong>Date of Birth: </strong>
+            <%= user.email %>
+        </div>
+    <% end %>
+    <div>
+        <%= link_to "View Profile", profile_path(user) %>
+    </div>
+</div>

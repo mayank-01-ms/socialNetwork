@@ -1,9 +1,7 @@
 <h1>Invites</h1>
-<% @invites.each do | invite | %>
+<% @invites.each do | invite | %> 
     <div style="margin-top: 1rem">
-        <strong>Name: </strong> <%= invite.user.first_name + " " + invite.user.last_name %> <br />
-        <strong>Email: </strong> <%= invite.user.email %> <br />
-        <%= link_to "View Profile", profile_path(invite.user) %>
+        <%= render "profile", obj: invite.user %>
         <%= button_to "Accept", accept_invite_path, params: {friend: invite.user} %>
         <%= button_to "Deny", deny_invite_path, method: :delete, params: {friend: invite.user} %>
     </div> 
