@@ -5,6 +5,11 @@ class UsersController < ApplicationController
         @friend_id = params['friend']
         @friend_to_add = User.find(@friend_id)
 
+        if @friend_id == current_user.id.to_s
+            flash[:notice] = "Cannot send invite to yourself"
+            redirect_to root_path and return
+        end
+
         if @friend_to_add.nil?
             flash[:alert] = "User doesn't exists"
             redirect_to root_path
