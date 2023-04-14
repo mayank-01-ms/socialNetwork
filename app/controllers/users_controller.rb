@@ -66,8 +66,9 @@ class UsersController < ApplicationController
 
     def feed
         @friends = current_user.friends
-        @posts = Post.all.where({user_id: @friends, user_id: current_user})
-        # @posts = Post.all.where("(created_at > ? AND user_id IN ?)", 24.hours.ago, @friends)
+        @posts = Post.where({user_id: @friends}).where("created_at > ?", 24.hours.ago)
+        
+        @suggestions = User.where.not({id: @friends}).where.not({id: current_user})
     end
 
     def index
@@ -87,7 +88,7 @@ class UsersController < ApplicationController
             redirect_to search_path and return
         else
             @query = params[:query]
-            @results = User.all.where("first_name || ' ' || last_name LIKE ?", "%#{@query}%")
+            @results = User.where("first_name || ' ' || last_name LIKE ?", "%#{@query}%")
         end
     end
 
