@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_12_122515) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_14_064102) do
   create_table "friendships", force: :cascade do |t|
     t.integer "user_id"
     t.integer "friend_id"
@@ -35,6 +35,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_12_122515) do
     t.datetime "updated_at", null: false
     t.integer "user_id"
     t.string "post_type"
+    t.boolean "is_private", default: false
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 

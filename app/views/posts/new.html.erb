@@ -21,6 +21,11 @@
       <%= form.label :media, style: "display: block" %>
       <%= form.file_field :media %>
     </div>
+
+    <div>
+      <%= form.label :private_post, style: "display: block" %>
+      <%= form.radio_button :is_private, true %> Yes
+    </div>
   
     <div>
       <%= form.submit %>

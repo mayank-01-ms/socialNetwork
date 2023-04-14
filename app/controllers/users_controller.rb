@@ -80,7 +80,12 @@ class UsersController < ApplicationController
     end
 
     def posts
-        @posts = Post.all.where({user_id: params[:user_id]})
+        user_id = params[:user_id]
+        if user_id == current_user.id.to_s or helpers.are_friends?(current_user, user_id)
+            @posts = Post.all.where({user_id: user_id})
+        else 
+            @posts = Post.all.where({user_id: user_id}).where({is_private: false})
+        end
     end
 
     def search
