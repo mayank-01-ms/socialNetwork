@@ -50,10 +50,12 @@ class MediaUploader < CarrierWave::Uploader::Base
   # Override the filename of the uploaded files:
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
   def filename
-    random_token = Digest::SHA2.hexdigest("#{Time.now.utc}--#{model.id.to_s}").first(20)
-    ivar = "@#{mounted_as}_secure_token"    
-    token = model.instance_variable_get(ivar)
-    token ||= model.instance_variable_set(ivar, random_token)
-    "#{model.id}_#{token}.jpg" if original_filename
+    @name ||= "#{timestamp}-#{super}" if original_filename.present? and 
+    super.present?
+  end
+
+  def timestamp
+    var = :"@#{mounted_as}_timestamp"
+    model.instance_variable_get(var) or model.instance_variable_set(var, Time.now.to_i)
   end
 end
