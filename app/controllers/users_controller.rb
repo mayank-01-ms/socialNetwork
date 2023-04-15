@@ -37,6 +37,8 @@ class UsersController < ApplicationController
 
         # if invite exists for current user, then only take action
         @check_invite = Invitation.find_by({sent_to: current_user.id, user_id: @friend_id})
+        #checking for reverse invite also as it also needs to be deleted or later will throw uniqueness errror
+        @reverse_check_invite = Invitation.find_by({sent_to: @friend_id, user_id: current_user.id})
         if @check_invite.nil?
             flash[:alert] = "Something went wrong"
             redirect_to root_path
@@ -45,6 +47,7 @@ class UsersController < ApplicationController
             
             if friendship.save
                 @check_invite.destroy
+                @reverse_check_invite.destroy unless @reverse_check_invite.nil?
                 flash[:notice] = "Accepted invitation"
             else
                 flash[:alert] = "Could not accept invite"
