@@ -5,36 +5,41 @@
 
   <div class="field">
     <%= f.label :first_name %><br />
-    <%= f.text_field :first_name, autofocus: true %>
+    <%= f.text_field :first_name, autofocus: true, class: "form-control w-auto" %>
   </div>
 
   <div class="field">
     <%= f.label :last_name %><br />
-    <%= f.text_field :last_name, autofocus: true %>
+    <%= f.text_field :last_name, autofocus: true, class: "form-control w-auto" %>
   </div>
 
   <div class="field">
     <%= f.label :dob %><br />
-    <%= f.date_field :dob, autofocus: true %>
+    <%= f.date_field :dob, autofocus: true, class: "form-control w-auto" %>
   </div>
 
   <div>
     <%= f.label :avatar, style: "display: block" %>
-    <%= f.file_field :avatar %>
+    <%= f.file_field :avatar, class: "form-control w-auto" %>
   </div>
   
   <div class="field">
     <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "current-password" %>
+    <%= f.password_field :current_password, autocomplete: "current-password", class: "form-control w-auto" %>
   </div>
 
   <div class="actions">
-    <%= f.submit "Update" %>
+    <%= f.submit "Update", class: "btn btn-primary" %>
   </div>
 <% end %>
 
 <h3>Delete account</h3>
 
-<div>Unhappy? <%= button_to "Delete my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %></div>
+<div>Unhappy? <%= button_to "Delete my account", registration_path(resource_name), 
+  data: { confirm: "Are you sure?", 
+  turbo_confirm: "Are you sure?" }, 
+  method: :delete,
+  class: "btn btn-danger"
+ %></div>
 
 <%= link_to "Back", :back %>

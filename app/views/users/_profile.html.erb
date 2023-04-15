@@ -1,23 +1,25 @@
 <% user = obj %>
-<div>
+
+<div class="text-center" style="width: 18rem;">
     <div>
         <%= render "profile_image", obj: user %>
     </div>
-    <div>
-        <strong>Name: </strong>
-        <%= user.first_name + " " + user.last_name %>
-    </div>
-    <%if current_user and are_friends?(current_user, user) %>
-        <div>
-            <strong>email: </strong>
-            <%= user.email %>
+    <div class="card-body">
+        <div class="card-title">
+            <%= user.first_name + " " + user.last_name %>
         </div>
+        <%if current_user and are_friends?(current_user, user) %>
+            <div class="card-text">
+                <strong>email: </strong>
+                <%= user.email %>
+            </div>
+            <div class="card-text">
+                <strong>Date of Birth: </strong>
+                <%= user.email %>
+            </div>
+        <% end %>
         <div>
-            <strong>Date of Birth: </strong>
-            <%= user.email %>
+            <%= link_to "View Profile", profile_path(user), class: "btn btn-primary" %>
         </div>
-    <% end %>
-    <div>
-        <%= link_to "View Profile", profile_path(user) %>
     </div>
 </div>

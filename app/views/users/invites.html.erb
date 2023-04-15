@@ -2,7 +2,9 @@
 <% @invites.each do | invite | %> 
     <div style="margin-top: 1rem">
         <%= render "profile", obj: invite.user %>
-        <%= button_to "Accept", accept_invite_path, params: {friend: invite.user} %>
-        <%= button_to "Deny", deny_invite_path, method: :delete, params: {friend: invite.user} %>
+        <div class="d-inline-flex"">
+        <%= button_to "Accept", accept_invite_path, params: {friend: invite.user}, class: "btn btn-success" %>
+        <%= button_to "Deny", deny_invite_path, method: :delete, params: {friend: invite.user}, class: "btn btn-danger" %>
+        </div>
     </div> 
 <% end %>

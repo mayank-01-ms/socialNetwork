@@ -1,12 +1,14 @@
 <h1>Search</h1>
-<%= form_tag search_path, :method => "get" do %>
-    <%= search_field_tag :query, params[:query], placeholder: "Search for users" %>
-    <%= button_tag "Search", :name => nil %>
+<%= form_tag search_path, :method => "get", class: "form-inline my-2 my-lg-0" do %>
+    <%= search_field_tag :query, params[:query], placeholder: "Search for users", class: "form-control mr-sm-2" %>
+    <%= button_tag "Search", :name => nil, class: "btn btn-outline-success my-2 my-sm-0" %>
 <% end %>
 
 <h1>Result</h1>
+<div class="d-flex flex-wrap">
 <% @results && @results.each do |user| %>
     <% if is_profile_searchable?(current_user.id, user.id) %>
         <%= render "profile", obj: user %>
     <% end %>
 <% end %>
+</div>

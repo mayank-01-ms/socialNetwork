@@ -2,18 +2,26 @@
 <%= %>
 Posts
 </h1>
+<div class="container mt-4 mb-5">
+    <div class="d-flex justify-content-center row">
+        <div class="col-md-8">
+            <div class="feed p-2">
+            
 <% @posts.each do | post | %>
     <div style="margin-top: 1rem">
-        <strong>Caption: </strong> <%= post.text %> <br />
-        <strong>Type: </strong> <%= post.post_type %> <br />
         <% if post.post_type != 'text' %>
             <% if post.post_type == 'video' %>
-                <video src=<%post.media %> />
-            <% else %>
-                <img src=<%= post.media %> />        
+                <%= render "video_post", obj: post %>
+            <% else %>   
+                <%= render "image_post", obj: post %>
             <% end %>
-            <br />
+        <% else %>
+            <%= render "text_post", obj: post %>
         <% end %>
-        <strong>Created at: </strong> <%= post.created_at %> <br />
     </div> 
 <% end %>
+
+            </div>
+        </div>
+    </div>
+</div>

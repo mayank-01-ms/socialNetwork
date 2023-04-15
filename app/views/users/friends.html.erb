@@ -1,12 +1,16 @@
 <h1> 
-<%= %>
 My friends
 </h1>
+<div class="d-flex flex-wrap">
 <% @friends.each do | friend | %>
-    <div style="margin-top: 1rem">
+    <div style="padding: 1rem !important">
+        <div class="text-center">
+            <%= render "profile_image", obj: friend %>
+        </div>
         <strong>Name: </strong> <%= friend.first_name + " " + friend.last_name %> <br />
         <strong>Email: </strong> <%= friend.email %> <br />
         <strong>Date Of Birth: </strong> <%= friend.dob %> <br />
         <strong>Friends since: </strong> <%= friend.created_at %> <br />
     </div> 
 <% end %>
+</div>

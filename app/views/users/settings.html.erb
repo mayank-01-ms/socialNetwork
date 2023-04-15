@@ -14,18 +14,18 @@
 
     <div>
         <%= f.label :posts_visible_to, style: "display: block" %>
-        <%= f.select :posts_visible_to, User.posts_visible_tos.map { |key, value| [key.humanize, key] }%>
+        <%= f.select :posts_visible_to, User.posts_visible_tos.map { |key, value| [key.humanize, key] }, {}, {class: "form-control w-auto"}%>
     </div>
     <div>
         <%= f.label :who_can_send_me_invites?, style: "display: block" %>
-        <%= f.select :allow_invites_from, User.allow_invites_froms.map { |key, value| [key.humanize, key] } %>
+        <%= f.select :allow_invites_from, User.allow_invites_froms.map { |key, value| [key.humanize, key] }, {}, {class: "form-control w-auto"} %>
     </div>
     <div>        
         <%= f.label :alow_my_profile_to_be_searched_by, style: "display: block" %>
-        <%= f.select :search_visibility, User.search_visibilities.map { |key, value| [key.humanize, key] } %>
+        <%= f.select :search_visibility, User.search_visibilities.map { |key, value| [key.humanize, key] }, {}, {class: "form-control w-auto"} %>
     </div>
 
     <br />
-    <%= button_to "Update profile" %>
+    <%= button_to "Update profile", update_settings_path, class: "btn btn-primary" %>
 
 <% end %>

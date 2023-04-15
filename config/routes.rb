@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   delete 'deny_invite', to: "users#deny_invite"
 
   get '/settings', to: "users#settings"
-  patch '/settings', to: "users#update_settings"
+  patch '/settings', to: "users#update_settings", as: :update_settings
 
   get 'search', to: "users#search"
   get 'feed', to: "users#feed"

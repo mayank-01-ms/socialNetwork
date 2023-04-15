@@ -1,0 +1,41 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<a class="navbar-brand" href="#">Navbar</a>
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+  <span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarNav">
+  <ul class="navbar-nav mr-auto">
+    <% if current_user %>
+      <li class="nav-item active">
+        <%= link_to "Profile", profile_path(current_user), class: "nav-link" %>
+      </li>
+        <li class="nav-item">
+        <%= link_to "Settings", settings_path, class: "nav-link" %>
+        </li>
+      <li class="nav-item">
+        <%= link_to "Feed", feed_path, class: "nav-link" %>
+      </li>
+      <li class="nav-item">
+        <%= link_to "Invites", invites_path, class: "nav-link" %>
+      </li>
+      <li class="nav-item">
+        <%= link_to "My posts", user_posts_path(current_user), class: "nav-link" %>
+      </li>
+      <li class="nav-item">
+        <%= link_to "My friends", friends_path, class: "nav-link" %>
+      </li>
+      <li class="nav-item">
+        <%= link_to "Create new post", new_post_path, class: "nav-link" %>
+      </li>
+    <% else %>
+      <li class="nav-item">
+        <%= link_to "Login", new_user_session_path, class: "nav-link" %>
+      </li>
+    <% end %>
+  </ul>
+  <%= form_tag search_path, :method => "get", class: "form-inline my-2 my-lg-0" do %>
+    <%= search_field_tag :query, params[:query], placeholder: "Search for users", class: "form-control mr-sm-2" %>
+    <%= button_tag "Search", :name => nil, class: "btn btn-outline-success my-2 my-sm-0" %>
+  <% end %>
+</div>
+</nav>

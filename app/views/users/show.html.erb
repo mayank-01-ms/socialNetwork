@@ -1,46 +1,46 @@
-<h1>
-    <%= @user.first_name %>
-    's Profile
-</h1>
+<section class="vh-100" style="background-color: #eee;">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-md-12 col-xl-4">
 
-<div>
-    <%= render "profile_image", obj: @user %>
-</div>
-
-<div>
-    <strong>First name:</strong>
-    <%= @user.first_name %>
-</div>
-
-<div>
-    <strong>Last name:</strong>
-    <%= @user.last_name %>
-</div>
-
-<div>
-    <strong>Email</strong>
-    <%= @user.email %>
-</div>
-
-<div>
-    <strong>Date of birth</strong>
-    <%= @user.dob %>
-</div>
-
-<%if current_user && current_user != @user %>
-<div>
-    <% if are_friends?(current_user, @user) %>
-        Friends
-    <% elsif already_sent_invite?(current_user, @user) %>
-        Pending invite
-    <% else %>
-        <%= button_to "Add friend", add_friend_path, params: {friend: @user} %>
-    <% end %>
-</div>
-<% end %>
-
-<%= link_to "View Posts", user_posts_path(@user) %>
-
-<% if current_user && current_user == @user %>
-    <%= link_to "Edit Profile", edit_user_registration_path %>
-<% end %>
+        <div class="card" style="border-radius: 15px;">
+          <div class="card-body text-center">
+            <div class="mt-3 mb-4">
+                <%= render "profile_image", obj: @user %>
+            </div>
+            <h4 class="mb-2"><%= @user.first_name + " " + @user.last_name %></h4>
+            <%= link_to "View Posts", user_posts_path(@user), class: "btn btn-primary btn-rounded btn-sm" %>
+            <div class="text-center mt-5 mb-2">
+              <div>
+                <p class="mb-2 h5">Email: </p>
+                <p class="text-muted mb-0"><%= @user.email %></p>
+              </div>
+              <div class="px-3">
+                <p class="mb-2 h5">Date of birth</p>
+                <p class="text-muted mb-0"><%= @user.dob %></p>
+              </div>
+            </div>
+            <% if current_user && current_user == @user %>
+                <%= link_to "Edit Profile", edit_user_registration_path %>
+            <% end %>
+            <%if current_user && current_user != @user %>
+                <div>
+                    <% if are_friends?(current_user, @user) %>
+                        <p class="btn btn-secondary">
+                        Friends
+                        </p>
+                    <% elsif already_sent_invite?(current_user, @user) %>
+                        <p class="btn btn-success">
+                        Pending invite
+                        </p>
+                    <% else %>
+                        <%= button_to "Add friend", add_friend_path, params: {friend: @user}, class: "btn btn-info btn-rounded btn-sm" %>
+                    <% end %>
+                </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

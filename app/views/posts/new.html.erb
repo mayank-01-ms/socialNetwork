@@ -14,12 +14,12 @@
   
     <div>
       <%= form.label :text, style: "display: block" %>
-      <%= form.text_field :text %>
+      <%= form.text_field :text, class: "form-control rounded-0" %>
     </div>
 
     <div>
       <%= form.label :media, style: "display: block" %>
-      <%= form.file_field :media %>
+      <%= form.file_field :media, class: "form-control w-auto" %>
     </div>
 
     <div>
@@ -28,7 +28,7 @@
     </div>
   
     <div>
-      <%= form.submit %>
+      <%= form.submit "Create Post", class: "btn btn-primary" %>
     </div>
   <% end %>
   
