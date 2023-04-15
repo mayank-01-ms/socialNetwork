@@ -74,7 +74,7 @@ class UsersController < ApplicationController
 
     def feed
         @friends = current_user.friends
-        @posts = Post.where({user_id: @friends}).where("created_at > ?", 24.hours.ago)
+        @posts = Post.where({user_id: @friends}).or(Post.where({user_id: current_user})).where("created_at > ?", 24.hours.ago)
         
         @suggestions = User.where.not({id: @friends}).where.not({id: current_user}).limit(10)
     end
