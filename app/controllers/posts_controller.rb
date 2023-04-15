@@ -1,5 +1,7 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_post, only: [ :edit, :update, :destroy ]
+  before_action :require_same_user, only: [:edit, :update, :destroy]
 
   # def index
   #   @posts = Post.all()
@@ -34,9 +36,26 @@ class PostsController < ApplicationController
     end
   end
 
+  def destroy
+    @post.destroy
+    flash[:notice] = "Post deleted successfully"
+    redirect_to user_posts_path(current_user)
+  end
+
   private
 
     def post_params
       params.require(:post).permit(:text, :media, :type, :is_private)
+    end
+
+    def set_post
+      @post = Post.find(params[:id])
+    end
+
+    def require_same_user
+      if current_user != @post.user
+        flash[:alert] = "You can delete only your own posts"
+        redirect_to root_path
+      end
     end
 end

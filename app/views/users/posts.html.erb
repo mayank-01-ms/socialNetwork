@@ -18,6 +18,9 @@ Posts
         <% else %>
             <%= render "text_post", obj: post %>
         <% end %>
+        <div>
+            <%= button_to "Delete", delete_post_path(post), method: :delete, class: "btn btn-danger" %>
+        </div>
     </div> 
 <% end %>
 

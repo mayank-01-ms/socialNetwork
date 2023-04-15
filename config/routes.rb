@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   post 'post/new', to: "posts#create", as: :new_post
   get 'friends', to: "users#friends"
   get 'users', to: "users#index"
+  delete 'posts/:id', to: "posts#destroy", as: :delete_post
 
   post 'add_friend', to: "users#add_friend"
   get 'invites', to: "users#invites"
