@@ -11,7 +11,7 @@
             <h4 class="mb-2"><%= @user.first_name + " " + @user.last_name %></h4>
             <%= link_to "View Posts", user_posts_path(@user), class: "btn btn-primary btn-rounded btn-sm" %>
             <div class="text-center mt-5 mb-2">
-            <% if are_friends?(@user, current_user) %>
+            <% if current_user or are_friends?(@user, current_user) %>
               <div>
                 <p class="mb-2 h5">Email: </p>
                 <p class="text-muted mb-0"><%= @user.email %></p>
