@@ -92,6 +92,10 @@ class UsersController < ApplicationController
 
     def posts
         user = User.find_by(username: params[:username])
+        if user.nil?
+            flash[:error] = "Cannot find user"
+            redirect_to root_path and return
+        end
         user_id = user.id
         if helpers.can_see_posts?(current_user, user_id)
             if user_id == current_user.id.to_s or helpers.are_friends?(current_user, user_id)
@@ -116,6 +120,10 @@ class UsersController < ApplicationController
 
     def show
         @user = User.find_by(username: params[:username])
+        if @user.nil?
+            flash[:alert] = "Cannot find user"
+            redirect_to root_path and return
+        end
     end
 
     def settings
