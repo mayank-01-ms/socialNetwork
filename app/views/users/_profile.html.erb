@@ -8,6 +8,10 @@
         <div class="card-title">
             <%= user.first_name + " " + user.last_name %>
         </div>
+        <div class="card-title">
+            <strong>Username:</strong>
+            <%= user.username %>
+        </div>
         <%if current_user and are_friends?(current_user, user) %>
             <div class="card-text">
                 <strong>email: </strong>
@@ -19,7 +23,7 @@
             </div>
         <% end %>
         <div>
-            <%= link_to "View Profile", profile_path(user), class: "btn btn-primary" %>
+            <%= link_to "View Profile", profile_path(user.username), class: "btn btn-primary" %>
         </div>
     </div>
 </div>

@@ -28,7 +28,7 @@ class UsersController < ApplicationController
                 end
             end
         end
-        redirect_to profile_path(@friend_id)
+        redirect_to profile_path(@friend_to_add.username)
 
     end
     
@@ -91,7 +91,8 @@ class UsersController < ApplicationController
     end
 
     def posts
-        user_id = params[:user_id]
+        user = User.find_by(username: params[:username])
+        user_id = user.id
         if helpers.can_see_posts?(current_user, user_id)
             if user_id == current_user.id.to_s or helpers.are_friends?(current_user, user_id)
                 @posts = Post.all.where({user_id: user_id})
@@ -114,7 +115,7 @@ class UsersController < ApplicationController
     end
 
     def show
-        @user = User.find(params[:id])
+        @user = User.find_by(username: params[:username])
     end
 
     def settings

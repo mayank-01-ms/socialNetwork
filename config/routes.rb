@@ -3,9 +3,9 @@ Rails.application.routes.draw do
   get 'pages/index'
   root "pages#index"
   
-  get 'profile/:id', to: "users#show", as: :profile
+  get 'profile/:username', to: "users#show", as: :profile
 
-  get '/posts/:user_id', to: "users#posts", as: :user_posts
+  get '/posts/:username', to: "users#posts", as: :user_posts
   get 'post/new', to: "posts#new"
   post 'post/new', to: "posts#create", as: :new_post
   get 'friends', to: "users#friends"

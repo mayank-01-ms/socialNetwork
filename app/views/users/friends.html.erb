@@ -8,6 +8,7 @@ My friends
             <%= render "profile_image", obj: friend %>
         </div>
         <strong>Name: </strong> <%= friend.first_name + " " + friend.last_name %> <br />
+        <strong>Username: </strong> <%= friend.username %> <br />
         <strong>Email: </strong> <%= friend.email %> <br />
         <strong>Date Of Birth: </strong> <%= friend.dob %> <br />
         <strong>Friends since: </strong> <%= friend.created_at %> <br />

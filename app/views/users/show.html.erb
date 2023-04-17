@@ -9,7 +9,8 @@
                 <%= render "profile_image", obj: @user %>
             </div>
             <h4 class="mb-2"><%= @user.first_name + " " + @user.last_name %></h4>
-            <%= link_to "View Posts", user_posts_path(@user), class: "btn btn-primary btn-rounded btn-sm" %>
+            Username: <h5 class="mb-2"><%= @user.username %></h5>
+            <%= link_to "View Posts", user_posts_path(@user.username), class: "btn btn-primary btn-rounded btn-sm" %>
             <div class="text-center mt-5 mb-2">
             <% if current_user or are_friends?(@user, current_user) %>
               <div>
