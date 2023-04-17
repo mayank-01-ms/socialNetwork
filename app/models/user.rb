@@ -1,5 +1,8 @@
 class User < ApplicationRecord
 
+  before_save :downcase_fields
+  before_validation :downcase_fields
+
   mount_uploader :avatar, AvatarUploader
 
   has_many :posts, dependent: :destroy
@@ -18,6 +21,7 @@ class User < ApplicationRecord
   enum :search_visibility, { everyone: 0, friends: 1, friends_of_friends: 2 }, suffix: true
   enum :allow_invites_from, { everyone: 0, friends_of_friends: 1 }, suffix: true
 
+  validates :username, length: {minimum: 3, maximum: 30}, uniqueness: true
   validates :first_name, length: { minimum: 3, maximum: 30 }
   validates :last_name, length: { minimum: 3, maximum: 30 }
   validates :dob, presence: true 
@@ -49,6 +53,10 @@ class User < ApplicationRecord
   def password_contains_number
     return if password.count("0-9") > 0
     errors.add :password, ' must contain at least one number'
+  end
+
+  def downcase_fields
+    self.username.downcase!
   end
 
 end

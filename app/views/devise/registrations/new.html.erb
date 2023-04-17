@@ -6,6 +6,11 @@
     <%= render "devise/shared/error_messages", resource: resource %>
 
         <div class="form">
+          <%= f.label :username %>
+          <%= f.text_field :username, autofocus: true, class: "form-control rounded-0" %>
+        </div>
+
+        <div class="form">
           <%= f.label :first_name %>
           <%= f.text_field :first_name, autofocus: true, autocomplete: "first-name", class: "form-control rounded-0" %>
         </div>
