@@ -93,7 +93,7 @@ class UsersController < ApplicationController
     def posts
         user = User.find_by(username: params[:username])
         if user.nil?
-            flash[:error] = "Cannot find user"
+            flash[:alert] = "Cannot find user"
             redirect_to root_path and return
         end
         user_id = user.id
