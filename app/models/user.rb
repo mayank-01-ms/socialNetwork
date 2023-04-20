@@ -10,9 +10,9 @@ class User < ApplicationRecord
   has_many :friendships
   has_many :friends, through: :friendships
 
-  has_many :invitations
-  has_many :chats
-  has_many :messages
+  has_many :invitations, dependent: :destroy
+  has_many :chats, dependent: :destroy
+  has_many :messages, dependent: :destory
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
