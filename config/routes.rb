@@ -22,4 +22,8 @@ Rails.application.routes.draw do
 
   get 'search', to: "users#search"
   get 'feed', to: "users#feed"
+  get 'chats', to: "chats#index"
+  post 'chat', to: "chats#create", as: :new_chat
+  get 'chat/:username', to: "chats#show", as: :chat
+  post 'message', to: "chats#create_message"
 end

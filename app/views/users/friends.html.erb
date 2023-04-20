@@ -12,6 +12,7 @@ My friends
         <strong>Email: </strong> <%= friend.email %> <br />
         <strong>Date Of Birth: </strong> <%= friend.dob %> <br />
         <strong>Friends since: </strong> <%= friend.created_at %> <br />
+        <%= button_to "Start chat", new_chat_path, params: {friend_id: friend}, class: "btn btn-primary" %>
     </div> 
 <% end %>
 </div>

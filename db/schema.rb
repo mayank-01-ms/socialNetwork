@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_17_081228) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_18_131259) do
+  create_table "chats", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "from"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id", "from"], name: "index_chats_on_user_id_and_from", unique: true
+  end
+
   create_table "friendships", force: :cascade do |t|
     t.integer "user_id"
     t.integer "friend_id"
@@ -26,6 +34,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_17_081228) do
     t.integer "sent_to"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "chat_id", null: false
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["chat_id"], name: "index_messages_on_chat_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -60,9 +78,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_17_081228) do
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
+  add_foreign_key "chats", "users"
+  add_foreign_key "chats", "users", column: "from"
   add_foreign_key "friendships", "users"
   add_foreign_key "friendships", "users", column: "friend_id"
   add_foreign_key "invitations", "users"
   add_foreign_key "invitations", "users", column: "sent_to"
+  add_foreign_key "messages", "chats"
+  add_foreign_key "messages", "users"
   add_foreign_key "posts", "users"
 end

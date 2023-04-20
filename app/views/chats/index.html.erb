@@ -1,0 +1,12 @@
+<h1>Chats</h1>
+<% @chats.each do | chat | %>
+    <div style="margin-top: 1rem">
+        <% if chat.user.username != current_user.username %>
+        <%= chat.user.username %>
+        <%= link_to "Chat now", chat_path(chat.user.username), class: "btn btn-primary" %>
+        <% else %>
+        <%= get_username_from_id(chat.from) %>
+        <%= link_to "Chat now", chat_path(get_username_from_id(chat.from)), class: "btn btn-primary" %>
+        <% end %>
+    </div> 
+<% end %>
