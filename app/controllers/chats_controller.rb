@@ -46,6 +46,8 @@ class ChatsController < ApplicationController
   end
 
   def show
+    @chats = Chat.where(from: current_user.id).or(Chat.where(user_id: current_user.id))
+
     @friend_username = params[:username]
     @friend = User.find_by({username: @friend_username})
 
