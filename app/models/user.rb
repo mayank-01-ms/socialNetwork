@@ -12,7 +12,7 @@ class User < ApplicationRecord
 
   has_many :invitations, dependent: :destroy
   has_many :chats, dependent: :destroy
-  has_many :messages, dependent: :destory
+  has_many :messages, dependent: :destroy
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable

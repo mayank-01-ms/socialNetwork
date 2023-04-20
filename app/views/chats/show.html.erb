@@ -99,7 +99,7 @@
                                     :
                                     "https://ui-avatars.com/api/?name=#{message.user.first_name}+#{message.user.last_name}"
                     %>
-                    <% if current_user == message.user %>
+                    <% if current_user != message.user %>
                         <div class="d-flex flex-row justify-content-start">
                         <img src=<%= avatar_url %> style="height: 60px; width: 60px; border-radius: 50%" />
                             <div>
